@@ -27,10 +27,11 @@ namespace CryptoProject
         private bool isStepRequired = false;
         private String chosenAlgorithm;
 
+        public Crypto.Crypto currentAlgorithm;
 
         public MainWindow()
         {
-
+            this.currentAlgorithm = new Crypto.MonoAlphabetic("zyxwvutsrqponmlkjihgfedcba");
             this.options = new List<String>();
             Choose chooseModal = new Choose();
 
@@ -107,7 +108,7 @@ namespace CryptoProject
         private void EncryptBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(RawText.Text);
-            MessageBox.Show(Crypto.monoAlphabeticCipher_reverse(RawText.Text));
+            MessageBox.Show(currentAlgorithm.encrypt(RawText.Text));
         }
     }
 }

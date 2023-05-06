@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CryptoProject
 {
-    class Crypto
+    class Crypto_old
     {
         public static String monoTable = "zyxwvutsrqponmlkjihgfedcbaABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
