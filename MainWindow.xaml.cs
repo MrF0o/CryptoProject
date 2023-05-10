@@ -73,13 +73,19 @@ namespace CryptoProject
             }
 
             InitializeComponent();
-            this.Title = this.Title  + Algorithm;
+            this.Title = this.Title + Algorithm;
 
             if (options.Count <= 0)
             {
-                Approche.Visibility = Visibility.Hidden;
+                Approche.IsEnabled = false;
                 KeyInput.IsEnabled = true;
-            } else
+                Approach.Text = "Mixed";
+
+                isKeyRequired = true;
+                currentAlgorithm = new Crypto.MixedCipher();
+
+            }
+            else
             {
                 foreach (String item in options)
                 {
@@ -94,21 +100,71 @@ namespace CryptoProject
             this.chosenAlgorithm = Approach.SelectedItem.ToString();
             switch (chosenAlgorithm)
             {
-                case "mono-alphabetique a cle": case "vigenere": case "Grille avec clé":
+                case "mono-alphabetique a cle":
                     isKeyRequired = true;
                     KeyInput.IsEnabled = true;
                     break;
+                case "vigenere":
+                    {
+                        isKeyRequired = true;
+                        KeyInput.IsEnabled = true;
+                        currentAlgorithm = new Crypto.VigenereCipher();
+                    }
+                    break;
+                case "Grille avec clé":
+                    {
+                        isKeyRequired = true;
+                        KeyInput.IsEnabled = true;
+                    }
+                    break;
+                case "Zig Zag":
+                    {
+                        isKeyRequired = false;
+                        KeyInput.IsEnabled = false;
+
+                        Prompt p = new Prompt("ZigZag depth? (profondeur)");
+                        bool? res = p.ShowDialog();
+                        currentAlgorithm = new Crypto.ZigZag(p.value);
+                    }
+                    break;
+                case "mono-alphabetique de cesar":
+                    {
+                        isKeyRequired = false;
+                        KeyInput.IsEnabled = false;
+
+                        Prompt p = new Prompt("Shift Value? (k)");
+                        bool? res = p.ShowDialog();
+                        currentAlgorithm = new Crypto.CesarMonoAlphabetic(p.value);
+                    }
+                    break;
                 default:
-                    isKeyRequired = false;
-                    KeyInput.IsEnabled = false;
+                    MessageBox.Show("somehow you didn't select a valid algorithm");
                     break;
             }
         }
 
         private void EncryptBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(RawText.Text);
-            MessageBox.Show(currentAlgorithm.encrypt(RawText.Text));
+
+            if (isKeyRequired)
+            {
+                if (KeyInput.Text != "")
+                {
+                    currentAlgorithm.Key = KeyInput.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Key cannot be empty for " + Approach.Text, "Error", MessageBoxButton.OK);
+                    return;
+                }
+            }
+
+            this.Result.Text = currentAlgorithm.encrypt(RawText.Text);
+        }
+
+        private void DecryptBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Result.Text = currentAlgorithm.decrypt(RawText.Text);
         }
     }
 }
