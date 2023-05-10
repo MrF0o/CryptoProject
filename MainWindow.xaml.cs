@@ -160,11 +160,31 @@ namespace CryptoProject
             }
 
             this.Result.Text = currentAlgorithm.encrypt(RawText.Text);
+            Copy.IsEnabled = true;
         }
 
         private void DecryptBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (isKeyRequired)
+            {
+                if (KeyInput.Text != "")
+                {
+                    currentAlgorithm.Key = KeyInput.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Key cannot be empty for " + Approach.Text, "Error", MessageBoxButton.OK);
+                    return;
+                }
+            }
+
             this.Result.Text = currentAlgorithm.decrypt(RawText.Text);
+            Copy.IsEnabled = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(Result.Text);
         }
     }
 }

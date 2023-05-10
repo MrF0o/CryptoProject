@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptoProject"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
         Title="Prompt" Height="254" Width="579">
     <Grid Margin="0,0,0,2">
         <Label x:Name="Title" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="105,23,0,0" VerticalAlignment="Top" Width="365" FontSize="20" FontWeight="SemiBold"/>

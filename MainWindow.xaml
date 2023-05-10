@@ -28,7 +28,8 @@
             <Button x:Name="DecryptBtn" Content="Decrypt" HorizontalAlignment="Left" Margin="10,393,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.117,0.221" Width="310" Height="40" Click="DecryptBtn_Click"/>
             <Grid Margin="400,0,0,0" Background="#e0e0e0">
                 <Label Content="Result" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Margin="10,10,0,0" RenderTransformOrigin="0.931,-0.316"/>
-                <TextBlock x:Name="Result"  HorizontalAlignment="Center" Margin="0,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="335" Width="380"><Run Language="fr-fr" Text="sdsd"/></TextBlock>
+                <TextBlock x:Name="Result"  HorizontalAlignment="Center" Margin="0,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="335" Width="380" Text=""/>
+                <Button x:Name="Copy" Content="Copy" HorizontalAlignment="Left" Margin="337,441,0,0" VerticalAlignment="Top" Click="Button_Click" IsEnabled="False"/>
             </Grid>
         </Grid>
 
